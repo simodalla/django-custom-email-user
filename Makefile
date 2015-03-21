@@ -24,24 +24,26 @@ clean-pyc:
 	find . -name '*~' -exec rm -f {} +
 
 lint:
-	flake8 django-custom-email-user tests
+	flake8 custom_email_user tests
 
 test:
-	python runtests.py test
+	DJANGO_SETTINGS_MODULE=tests.settings \
+		django-admin.py test tests
 
 test-all:
 	tox
 
 coverage:
-	coverage run --source django-custom-email-user setup.py test
+	coverage erase
+	DJANGO_SETTINGS_MODULE=tests.settings \
+		coverage run --branch --source=custom_email_user `which django-admin.py` test tests
 	coverage report -m
 	coverage html
-	open htmlcov/index.html
 
 docs:
 	rm -f docs/django-custom-email-user.rst
 	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ django-custom-email-user
+	sphinx-apidoc -o docs/ custom_email_user
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
 	open docs/_build/html/index.html
