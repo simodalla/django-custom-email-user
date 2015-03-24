@@ -27,16 +27,14 @@ lint:
 	flake8 custom_email_user tests
 
 test:
-	DJANGO_SETTINGS_MODULE=tests.settings \
-		django-admin.py test tests
+	py.test tests/
 
 test-all:
 	tox
 
 coverage:
 	coverage erase
-	DJANGO_SETTINGS_MODULE=tests.settings \
-		coverage run --branch --source=custom_email_user `which django-admin.py` test tests
+	coverage run --branch --source=custom_email_user `which py.test` tests
 	coverage report -m
 	coverage html
 

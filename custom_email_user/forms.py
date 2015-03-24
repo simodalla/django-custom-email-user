@@ -13,7 +13,7 @@ class EmailUserCreationForm(UserCreationForm):
     """
 
     def __init__(self, *args, **kargs):
-        super(EmailUser, self).__init__(*args, **kargs)
+        super(EmailUserCreationForm, self).__init__(*args, **kargs)
         del self.fields['username']
 
     class Meta:

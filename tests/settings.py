@@ -4,7 +4,7 @@ import os
 import django
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
+print(BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 SECRET_KEY = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
@@ -27,7 +27,6 @@ INSTALLED_APPS = [
 MEDIA_URL = '/media/'   # Avoids https://code.djangoproject.com/ticket/21451
 
 MIDDLEWARE_CLASSES = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -56,7 +55,8 @@ CACHES = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'django-custom-email-user'
     }
 }
 

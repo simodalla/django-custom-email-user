@@ -11,7 +11,6 @@ from .models import EmailUser
 from .forms import EmailUserChangeForm, EmailUserCreationForm
 
 
-@admin.register(EmailUser)
 class EmailUserAdmin(UserAdmin):
     # The forms to add and change user instances
 
@@ -51,4 +50,4 @@ class EmailUserAdmin(UserAdmin):
     ld_groups.short_description = _('groups')
 
 
-# admin.site.register(EmailUser, EmailUserAdmin)
+admin.site.register(EmailUser, EmailUserAdmin)

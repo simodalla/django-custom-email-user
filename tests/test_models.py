@@ -70,8 +70,7 @@ class TestEmailUserModel(TestCase):
 
     def test_email_user_send_email_to_user(self):
         args = ('test subject', 'test message', 'from@example.com')
-        result = self.user.email_user(*args)
-        print(result)
+        self.user.email_user(*args)
         self.assertEqual(len(mail.outbox), 1)
         message = mail.outbox[0]
         self.assertEqual(message.subject, args[0])
@@ -83,5 +82,3 @@ class TestEmailUserModel(TestCase):
         self.user.pk = 1
         self.assertEqual(self.user.get_absolute_url(),
                          '/admin/custom_email_user/emailuser/1/')
-
-
