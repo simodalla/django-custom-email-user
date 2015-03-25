@@ -3,9 +3,9 @@ from __future__ import unicode_literals, absolute_import
 
 from datetime import datetime
 try:
-    from unittest.mock import MagicMock, patch
+    from unittest.mock import patch
 except ImportError:
-    from mock import MagicMock, patch
+    from mock import patch
 
 import pytest
 
