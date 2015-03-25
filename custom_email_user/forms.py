@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals, absolute_import
 
+from django import get_version
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 from custom_email_user.models import EmailUser
@@ -35,4 +36,4 @@ class EmailUserChangeForm(UserChangeForm):
 
     class Meta:
         model = EmailUser
-        fields = '__all__'
+        fields = '__all__' if get_version() >= '1.6' else None
