@@ -9,7 +9,11 @@ except ImportError:
 
 import pytest
 
-from django.test import TestCase, override_settings
+from django.test import TestCase
+try:
+    from django.test import override_settings
+except ImportError:
+    from django.test.utils import override_settings
 from django.utils import timezone
 
 from custom_email_user.models import EmailUser
