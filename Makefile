@@ -23,7 +23,7 @@ clean-pyc:
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
 
-lint:
+flake8:
 	flake8 custom_email_user tests
 
 test:
