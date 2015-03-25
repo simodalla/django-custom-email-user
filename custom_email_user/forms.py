@@ -14,7 +14,8 @@ class EmailUserCreationForm(UserCreationForm):
 
     def __init__(self, *args, **kargs):
         super(EmailUserCreationForm, self).__init__(*args, **kargs)
-        del self.fields['username']
+        if 'username' in self.fields.keys():
+            del self.fields['username']
 
     class Meta:
         model = EmailUser
@@ -29,7 +30,8 @@ class EmailUserChangeForm(UserChangeForm):
 
     def __init__(self, *args, **kargs):
         super(EmailUserChangeForm, self).__init__(*args, **kargs)
-        del self.fields['username']
+        if 'username' in self.fields.keys():
+            del self.fields['username']
 
     class Meta:
         model = EmailUser
