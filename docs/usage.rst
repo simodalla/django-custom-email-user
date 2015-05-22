@@ -2,6 +2,6 @@
 Usage
 ========
 
-To use ddjango-custom-email-user in a project::
+To use django-custom-email-user in a project::
 
     import django-custom-email-user

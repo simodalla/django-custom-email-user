@@ -24,7 +24,7 @@ readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
-    name='ddjango-custom-email-user',
+    name='django-custom-email-user',
     version=version,
     description="""Cus""",
     long_description=readme + '\n\n' + history,

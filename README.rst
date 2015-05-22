@@ -1,5 +1,5 @@
 =============================
-ddjango-custom-email-user
+django-custom-email-user
 =============================
 
 .. image:: https://badge.fury.io/py/django-custom-email-user.png
@@ -21,7 +21,7 @@ The full documentation is at https://django-custom-email-user.readthedocs.org.
 Quickstart
 ----------
 
-Install ddjango-custom-email-user::
+Install django-custom-email-user::
 
     pip install django-custom-email-user
 

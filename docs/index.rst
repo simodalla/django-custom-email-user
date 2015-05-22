@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to ddjango-custom-email-user's documentation!
+Welcome to django-custom-email-user's documentation!
 =================================================================
 
 Contents:
