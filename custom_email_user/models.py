@@ -32,6 +32,10 @@ class EmailUser(AbstractBaseUser, PermissionsMixin):
         help_text=_('Designates whether this user should be treated as '
                     'active. Unselect this instead of deleting accounts.'))
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+    id_for_conversion_1 = models.IntegerField(blank=True, null=True)
+    username_for_conversion_1 = models.CharField(max_length=254, blank=True)
+    id_for_conversion_2 = models.IntegerField(blank=True, null=True)
+    username_for_conversion_2 = models.CharField(max_length=254, blank=True)
 
     objects = EmailUserManager()
 
@@ -55,7 +59,7 @@ class EmailUser(AbstractBaseUser, PermissionsMixin):
         return full_name.strip()
 
     def __str__(self):
-        return self.get_full_name()
+        return self.email
 
     def get_short_name(self):
         """Returns the short name for the user."""
@@ -70,3 +74,10 @@ class EmailUser(AbstractBaseUser, PermissionsMixin):
         Sends an email to this User.
         """
         return send_mail(subject, message, from_email, [self.email])
+
+    @staticmethod
+    def autocomplete_search_fields():
+        """
+        Grapelli autocomplete method.
+        """
+        return ['id__iexact', 'email__icontains']
