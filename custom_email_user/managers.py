@@ -44,52 +44,52 @@ class EmailUserManager(BaseUserManager):
         return self._create_user(email, password, True, True,
                                  **extra_fields)
 
-    def copy_fields(self, dest_user, source_user, fields=None,
-                    dest_update=True):
-        """
-        Update fields from list param 'fields' to 'dest_user' User from
-        'source_user' User.
-        """
-        fields = fields or []
-        changed = False
-        for field in fields:
-            social_field = getattr(source_user, field)
-            if not (getattr(dest_user, field) == social_field):
-                setattr(dest_user, field, social_field)
-                changed = True
-        if changed and dest_update:
-            dest_user.save()
-        return changed
+    # def copy_fields(self, dest_user, source_user, fields=None,
+    #                 dest_update=True):
+    #     """
+    #     Update fields from list param 'fields' to 'dest_user' User from
+    #     'source_user' User.
+    #     """
+    #     fields = fields or []
+    #     changed = False
+    #     for field in fields:
+    #         social_field = getattr(source_user, field)
+    #         if not (getattr(dest_user, field) == social_field):
+    #             setattr(dest_user, field, social_field)
+    #             changed = True
+    #     if changed and dest_update:
+    #         dest_user.save()
+    #     return changed
 
-    def set_fields_from_authorized(self, dest_user, authorized_user,
-                                   fields=None):
-        fields = fields or ['is_staff', 'is_superuser']
-        for field in fields:
-            setattr(dest_user, field, getattr(authorized_user, field, False))
+    # def set_fields_from_authorized(self, dest_user, authorized_user,
+    #                                fields=None):
+    #     fields = fields or ['is_staff', 'is_superuser']
+    #     for field in fields:
+    #         setattr(dest_user, field, getattr(authorized_user, field, False))
+    #
+    # def _email_for_sociallogin(self, subject, template, context=None):
+    #     context = context or {}
+    #     message = loader.get_template(template).render(Context(context))
+    #     mail_admins(subject,
+    #                 strip_tags(message).lstrip('\n'),
+    #                 fail_silently=True,
+    #                 html_message=message)
 
-    def _email_for_sociallogin(self, subject, template, context=None):
-        context = context or {}
-        message = loader.get_template(template).render(Context(context))
-        mail_admins(subject,
-                    strip_tags(message).lstrip('\n'),
-                    fail_silently=True,
-                    html_message=message)
+    # def email_new_sociallogin(self, request, user):
+    #     from django.core.urlresolvers import reverse
+    #     from django.contrib.admin.templatetags.admin_urls import admin_urlname
+    #     context = {'email': user.email,
+    #                'user_url': request.build_absolute_uri(
+    #                    reverse(admin_urlname(user._meta, 'changelist')))
+    #                            + '?email={}'.format(user.email)}
+    #     subject = 'Nuovo socialaccount di {}'.format(user.email)
+    #     return self._email_for_sociallogin(
+    #         subject, "custom_email_user/email/new_sociallogin.html", context)
 
-    def email_new_sociallogin(self, request, user):
-        from django.core.urlresolvers import reverse
-        from django.contrib.admin.templatetags.admin_urls import admin_urlname
-        context = {'email': user.email,
-                   'user_url': request.build_absolute_uri(
-                       reverse(admin_urlname(user._meta, 'changelist')))
-                               + '?email={}'.format(user.email)}
-        subject = 'Nuovo socialaccount di {}'.format(user.email)
-        return self._email_for_sociallogin(
-            subject, "custom_email_user/email/new_sociallogin.html", context)
-
-    def email_link_sociallogin(self, request, user):
-        context = {'email': user.email,
-                   'user_url': request.build_absolute_uri(
-                       user.get_absolute_url())}
-        subject = 'Collegamento socialaccount di {}'.format(user.email)
-        return self._email_for_sociallogin(
-            subject, "custom_email_user/email/link_sociallogin.html", context)
+    # def email_link_sociallogin(self, request, user):
+    #     context = {'email': user.email,
+    #                'user_url': request.build_absolute_uri(
+    #                    user.get_absolute_url())}
+    #     subject = 'Collegamento socialaccount di {}'.format(user.email)
+    #     return self._email_for_sociallogin(
+    #         subject, "custom_email_user/email/link_sociallogin.html", context)
