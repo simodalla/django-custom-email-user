@@ -62,10 +62,10 @@ class EmailUserManager(BaseUserManager):
         return changed
 
     def set_fields_from_authorized(self, dest_user, authorized_user,
-                                   fields=None, dest_update=False):
+                                   fields=None):
         fields = fields or ['is_staff', 'is_superuser']
-        return self.copy_fields(dest_user, authorized_user, fields=fields,
-                                dest_update=dest_update)
+        for field in fields:
+            setattr(dest_user, field, getattr(authorized_user, field, False))
 
     def _email_for_sociallogin(self, subject, template, context=None):
         context = context or {}
@@ -76,12 +76,15 @@ class EmailUserManager(BaseUserManager):
                     html_message=message)
 
     def email_new_sociallogin(self, request, user):
+        from django.core.urlresolvers import reverse
+        from django.contrib.admin.templatetags.admin_urls import admin_urlname
         context = {'email': user.email,
                    'user_url': request.build_absolute_uri(
-                       user.get_absolute_url())}
+                       reverse(admin_urlname(user._meta, 'changelist')))
+                               + '?email={}'.format(user.email)}
         subject = 'Nuovo socialaccount di {}'.format(user.email)
         return self._email_for_sociallogin(
-            subject, "users/email/new_sociallogin.html", context)
+            subject, "custom_email_user/email/new_sociallogin.html", context)
 
     def email_link_sociallogin(self, request, user):
         context = {'email': user.email,
@@ -89,4 +92,4 @@ class EmailUserManager(BaseUserManager):
                        user.get_absolute_url())}
         subject = 'Collegamento socialaccount di {}'.format(user.email)
         return self._email_for_sociallogin(
-            subject, "users/email/link_sociallogin.html", context)
+            subject, "custom_email_user/email/link_sociallogin.html", context)
