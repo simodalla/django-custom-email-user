@@ -3,11 +3,8 @@ from __future__ import unicode_literals, absolute_import
 
 from django.contrib.auth.models import BaseUserManager
 from django.core.exceptions import ValidationError
-from django.core.mail import mail_admins
 from django.core.validators import validate_email
-from django.template import loader, Context
 from django.utils import timezone
-from django.utils.html import strip_tags
 from django.utils.translation import ugettext as _
 
 
